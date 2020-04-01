@@ -70,7 +70,7 @@ function addData(obj) {
 
 // Update DOM
 function updateDOM(providedData = data) {
-  // Clear main div
+  // Clear main div.如果这里不用main.innerHTML clear main div, 那么random user会反复的重复的出现并叠加。
   main.innerHTML = '<h2><strong>Person</strong> Wealth</h2>';
 
   providedData.forEach(item => {
