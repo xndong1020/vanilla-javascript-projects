@@ -24,8 +24,10 @@ init()
 //   });
 
 async function init() {
+	const test = msg => console.log('receive notification', msg)
 	observer = new Observer()
 	observer.subscribe(updateDOM)
+	observer.subscribe(test)
 
 	loadingIndicator()
 
@@ -51,7 +53,7 @@ async function addUserClickHandler() {
 function doubleMoneyClickHandler() {
 	if (!Array.isArray(loadedUsers) || !loadedUsers.length) return
 	loadedUsers = doubleMoney(loadedUsers)
-	updateDOM(loadedUsers)
+	if (observer) observer.notify(loadedUsers)
 }
 
 // Sort users by richest
