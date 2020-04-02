@@ -13,7 +13,7 @@ function updateDOM(providedData = loadedUsers) {
   });
 }
 
-function updateSortIcon(desc = true) {
+function updateSortIcon(desc) {
   const btn = document.getElementById('sort');
   const btnText = desc ? `Sort Wealth ↑` : `Sort Wealth ↓`;
   btn.innerText = btnText;
@@ -25,4 +25,13 @@ function updateWealthTotal(wealth = 0) {
     ? `Please add some user`
     : `<h3>Total Wealth: <strong>${formatMoney(wealth)}</strong></h3>`;
   main.appendChild(wealthEl);
+}
+
+function loadingIndicator(display = true) {
+  const loadingIndicatorEl = document.createElement('h2');
+  loadingIndicatorEl.innerHTML = `Loading data from API...`;
+  main.appendChild(loadingIndicatorEl);
+
+  if (display) loadingIndicatorEl.setAttribute('style', 'display: block;');
+  else loadingIndicatorEl.setAttribute('style', 'display: none;');
 }

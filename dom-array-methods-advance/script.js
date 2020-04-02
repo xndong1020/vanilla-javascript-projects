@@ -11,16 +11,31 @@ let sortDesc = false;
 init();
 
 // for initial page load
+
+//--Use promise().then().finally()--
+// loadingIndicator();
+// getRandomUser()
+//   .then(user => {
+//     addData(user);
+//   })
+//   .finally(() => {
+//     loadingIndicator(false);
+//   });
+
 async function init() {
+  loadingIndicator();
   const user1 = await getRandomUser();
   const user2 = await getRandomUser();
   const user3 = await getRandomUser();
   loadedUsers = [user1, user2, user3];
+  loadingIndicator(false);
   updateDOM(loadedUsers);
 }
 
 async function addUserClickHandler() {
+  loadingIndicator();
   const user = await getRandomUser();
+  loadingIndicator(false);
   addData(user);
 }
 

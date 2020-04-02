@@ -12,7 +12,7 @@ async function getRandomUser() {
 }
 
 function getUsersByWealthAmont(users = [], amount = 0) {
-  return users.filter(user => user.money > amount);
+  return users.filter(user => Number(user.money) > amount);
 }
 
 function sortUsers(users = [], sortFn) {
