@@ -21,6 +21,7 @@ function updateSortIcon(desc) {
 
 function updateWealthTotal(wealth = 0) {
   const wealthEl = document.createElement('div')
+  wealthEl.setAttribute('id', 'wealth')
   wealthEl.innerHTML = !wealth
     ? `Please add some user`
     : `<h3>Total Wealth: <strong>${formatMoney(wealth)}</strong></h3>`
@@ -29,6 +30,7 @@ function updateWealthTotal(wealth = 0) {
 
 function loadingIndicator(display = true) {
   const loadingIndicatorEl = document.createElement('h2')
+  loadingIndicatorEl.setAttribute('id', 'loadingIndicator')
   loadingIndicatorEl.innerHTML = `Loading data from API...`
   main.appendChild(loadingIndicatorEl)
 

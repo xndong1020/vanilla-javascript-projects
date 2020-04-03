@@ -9,7 +9,7 @@ class Observer {
 
   unsubscribe = fn => {
     const fnIndex = this.subscribers.findIndex(subscriber => subscriber === fn)
-    this.subscribers = this.subscribers.splice(fnIndex)
+    if (fnIndex !== -1) this.subscribers.splice(fnIndex, 1)
   }
 
   count = () => {

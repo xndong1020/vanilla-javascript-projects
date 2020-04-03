@@ -1,5 +1,6 @@
-// Double eveyones money
+// Double everyone's money
 function doubleMoney(users = []) {
+  if (!users.length) return []
   return users.map(user => {
     return {
       ...user,
