@@ -12,7 +12,17 @@
     <link rel="stylesheet" type="text/css" href="libs/jasmine/jasmine.css" />
   </head>
   <body>
-    <div id="main" style="display: none;"></div>
+    <div class="container" style="display: none;">
+      <aside>
+        <button id="add-user"></button>
+        <button id="double"></button>
+        <button id="show-millionaires"></button>
+        <button id="sort"></button>
+        <button id="calculate-wealth"></button>
+      </aside>
+
+      <main id="main"></main>
+    </div>
     <script type="text/javascript" src="libs/jasmine/jasmine.js"></script>
     <script type="text/javascript" src="libs/jasmine/jasmine-html.js"></script>
     <script type="text/javascript" src="libs/jasmine/boot.js"></script>
@@ -28,5 +38,8 @@
     <!-- test user module -->
     <script src="user.js"></script>
     <script src="user.spec.js"></script>
+     <!-- test script module -->
+     <script src="script.js"></script>
+     <script src="script.spec.js"></script>
   </body>
 </html>

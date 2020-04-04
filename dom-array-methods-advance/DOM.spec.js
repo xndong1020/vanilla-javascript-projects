@@ -24,9 +24,10 @@ describe(`Test suite for 'DOM' module`, function() {
     let btnEl
     let btnText
     beforeEach(() => {
-      btnEl = document.createElement('button')
-      btnEl.setAttribute('id', 'sort')
-      main.appendChild(btnEl)
+      btnEl = document.getElementById('sort')
+    })
+    afterEach(() => {
+      btnEl.innerHTML = 'Sort Wealth ↓'
     })
     it('should show ↓ when sortDesc param is set to false', function() {
       updateSortIcon(false)
