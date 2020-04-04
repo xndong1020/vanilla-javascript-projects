@@ -43,22 +43,32 @@ describe(`Test suite for 'DOM' module`, function() {
   })
 
   describe(`'updateWealthTotal' should update totalWealth with correct text`, function() {
+    let loadedUsers
+
+    beforeEach(() => {
+      loadedUsers = []
+    })
+
     afterEach(() => {
-      const wealth = document.getElementById('wealth')
+      const wealth = document.getElementById('total')
       wealth.remove()
     })
     it('when wealth total is zero', function() {
-      updateWealthTotal(0)
-      const wealth = document.getElementById('wealth')
+      updateWealthTotal(loadedUsers)
+      const wealth = document.getElementById('total')
       const wealthHTML = wealth.innerHTML
       expect(wealthHTML).toContain('Please add some user')
     })
 
     it('when wealth total is greater than zero', function() {
-      updateWealthTotal(123)
-      const wealth = document.getElementById('wealth')
+      loadedUsers = [
+        { name: 'fake 01', money: 10 },
+        { name: 'fake 02', money: 20 },
+      ]
+      updateWealthTotal(loadedUsers)
+      const wealth = document.getElementById('total')
       const wealthHTML = wealth.innerHTML
-      expect(wealthHTML).toContain(123)
+      expect(wealthHTML).toContain(30)
     })
   })
 
