@@ -28,6 +28,7 @@ async function init() {
   observer = new Observer()
   observer.subscribe(updateDOM)
   observer.subscribe(consoleSubscriber)
+  observer.subscribe(updateWealthTotal)
 
   const user1 = await getRandomUser()
   addData(user1)
@@ -73,8 +74,7 @@ function showMillionairesClickHandler() {
 
 // Calculate the total wealth
 function calculateWealthClickHandler() {
-  const wealth = getUsersTotalAmount(loadedUsers)
-  updateWealthTotal(wealth)
+  updateWealthTotal(loadedUsers)
 }
 
 // Add new obj to data arr

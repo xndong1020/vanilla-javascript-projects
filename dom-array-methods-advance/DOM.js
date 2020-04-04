@@ -19,13 +19,23 @@ function updateSortIcon(desc) {
   btn.innerText = btnText
 }
 
-function updateWealthTotal(wealth = 0) {
-  const wealthEl = document.createElement('div')
-  wealthEl.setAttribute('id', 'wealth')
-  wealthEl.innerHTML = !wealth
-    ? `Please add some user`
-    : `<h3>Total Wealth: <strong>${formatMoney(wealth)}</strong></h3>`
-  main.appendChild(wealthEl)
+function updateWealthTotal(providedData = []) {
+	let wealthEl
+	const wealth = getUsersTotalAmount(providedData)
+	// check if wealthEl is already created
+	wealthEl = document.getElementById('total')
+	if (!wealthEl) {
+		const wealthEl = document.createElement('div')
+		wealthEl.setAttribute('id', 'total')
+		wealthEl.innerHTML = !wealth
+			? `Please add some user`
+			: `<h3>Total Wealth: <strong>${formatMoney(wealth)}</strong></h3>`
+		main.appendChild(wealthEl)
+	} else {
+		wealthEl.innerHTML = !wealth
+			? `Please add some user`
+			: `<h3>Total Wealth: <strong>${formatMoney(wealth)}</strong></h3>`
+	}
 }
 
 function loadingIndicator(display = true) {
