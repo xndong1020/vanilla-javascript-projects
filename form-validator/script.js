@@ -29,9 +29,9 @@ function checkEmail(input) {
 }
 
 // Check required fields
-function checkRequired(inputArr) {
+function checkRequired(inputArr =[]) {
   if (!Array.isArray(inputArr) || inputArr.some(input => !input)) {
-    console.log('some problem with inputArr')
+    toastr.error('Are you the 6 fingered man?')
   }
   inputArr.forEach(input => {
     if (input.value.trim() === '') {
@@ -75,32 +75,6 @@ function getFieldName(input) {
 form.addEventListener('submit', function(e) {
   e.preventDefault()
 
-  // It's not a good practice to use a lot of if-else statement.
-  // if (username.value === '') {
-  //   showError(username, 'Username is required');
-  // } else {
-  //   showSuccess(username);
-  // }
-
-  // if (email.value === '') {
-  //   showError(email, 'Email is required');
-  // } else if (!isValidEmail(email.value)) {
-  //   showError(email, 'Email is not valid');
-  // } else {
-  //   showSuccess(email);
-  // }
-
-  // if (password.value === '') {
-  //   showError(password, 'Username is required');
-  // } else {
-  //   showSuccess(password);
-  // }
-
-  // if (password2.value === '') {
-  //   showError(password2, 'Username is required');
-  // } else {
-  //   showSuccess(password2);
-  // }
   checkRequired([username, email, password, password2])
   checkLength(username, 3, 15)
   checkLength(password, 6, 25)
