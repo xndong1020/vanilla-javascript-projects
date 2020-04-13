@@ -47,9 +47,7 @@ function populateUI() {
 
   if (selectedSeats !== null && selectedSeats.length > 0) {
     seats.forEach((seat, index) => {
-      if (selectedSeats.indexOf(index) > -1) {
-        seat.classList.add('selected')
-      }
+      if (selectedSeats.includes(index)) seat.classList.add('selected')
     })
   }
 
@@ -57,7 +55,6 @@ function populateUI() {
 
   if (selectedMovieIndex !== null) {
     movieSelect.selectedIndex = selectedMovieIndex
-    console.log('Movie index', movieSelect.selectedIndex)
   }
 }
 
@@ -80,5 +77,5 @@ container.addEventListener('click', e => {
   }
 })
 
-// Call this on page load to initial count and total set,
+// Call this on page load to initial count and total set
 updateSelectedCount()
