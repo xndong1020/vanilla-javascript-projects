@@ -6,6 +6,10 @@ const movieSelect = document.getElementById('movie')
 
 populateUI()
 
+// Use Observer pattern
+const observer = new Observer()
+observer.subscribe(updateSelectedCount)
+
 // Add a "+" sign in front is the easiest way to convert string to number.
 let ticketPrice = +movieSelect.value
 
@@ -24,16 +28,19 @@ function updateSelectedCount() {
   // 2. Map through array
   // 3. return a new array indexes
 
-  // const seatsIndex = [...selectedSeats].map(seat => [...seats].indexOf(seat))
+  // const selectedSeatsIndeciesArray = [...selectedSeats].map(seat => [...seats].indexOf(seat))
 
   // Here Array.from(selectedSeats) can also copy the NodeList of selectedSeats into a array
-  const seatsIndex = Array.from(selectedSeats).map(seat =>
+  const selectedSeatsIndeciesArray = Array.from(selectedSeats).map(seat =>
     [...seats].indexOf(seat)
   )
 
   // localStorage let you store strings in the browser.
   // With localStorage, there's no need to import any libary or anything. It build into the browser.
-  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex))
+  localStorage.setItem(
+    'selectedSeatsIndeciesArray',
+    JSON.stringify(selectedSeatsIndeciesArray)
+  )
 
   const selectedSeatsCount = selectedSeats.length
 
@@ -43,11 +50,17 @@ function updateSelectedCount() {
 
 // Get data from localstorage and populate UI
 function populateUI() {
-  const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'))
+  const selectedSeatsIndeciesArray = JSON.parse(
+    localStorage.getItem('selectedSeatsIndeciesArray')
+  )
 
-  if (selectedSeats !== null && selectedSeats.length > 0) {
-    seats.forEach((seat, index) => {
-      if (selectedSeats.includes(index)) seat.classList.add('selected')
+  if (
+    selectedSeatsIndeciesArray !== null &&
+    selectedSeatsIndeciesArray.length > 0
+  ) {
+    seats.forEach((seat, seatIdx) => {
+      if (selectedSeatsIndeciesArray.includes(seatIdx))
+        seat.classList.add('selected')
     })
   }
 
@@ -62,7 +75,7 @@ function populateUI() {
 movieSelect.addEventListener('change', e => {
   ticketPrice = +e.target.value
   setMovieData(e.target.selectedIndex, e.target.value)
-  updateSelectedCount()
+  if (observer) observer.notify()
 })
 
 // Seat click event
@@ -72,8 +85,9 @@ container.addEventListener('click', e => {
     !e.target.classList.contains('occupied')
   ) {
     e.target.classList.toggle('selected')
-
-    updateSelectedCount()
+    // observer help to call the udpateSelectedCount()
+    // The benefit is that if there are more than one function needs to be called, and they all subscribe to one observer. So we only need to monitor all the subscribers together by one observer.
+    if (observer) observer.notify()
   }
 })
 
